@@ -39,7 +39,7 @@ f1 <- ggplot() +
         all the details of the first figure +
         theme(legend.position = "none")
 f2 <- ggplot() + 
-        all the details of the first figure
+        all the details of the second figure
 legend <- get.legend(f2)
 f2 <- f2 +
         theme(legend.position = "none")
