@@ -1,15 +1,15 @@
 # rtools
 Some useful functions in R
 
-dataframe_summary <- var.explorer(dataframe)
+dataframe_summary <- **var.explorer**(dataframe)
 
 > Creates a summary dataframe that can be used in RStudio similar to the variable explorer in Stata, but which also includes the summary statistics. This is useful particularly if you have a large dataset with a very large number of variables with hard to remember names. Can also be used to generate a table of summary statistics.
 
-x_growth <- growth rate(x, lag)
+x_growth <- **growth.rate**(x, lag)
 
 > Creates a growth rate variable. It doesn't require data to be time series.
 
-barplot_se(m, se, group_labels, title) 
+**barplot_se**(m, se, group_labels, title) 
 
 > Create a barplot with standard errors
 > `m`: list of means, showed as higher or lower bar columns
@@ -17,7 +17,7 @@ barplot_se(m, se, group_labels, title)
 > `group_labels`: list of labels for each bar
 > `title`: title of the barplot
 
-legend <- get.legend(a.gplot)
+legend <- **get.legend**(a.gplot)
 
 > Gets the legend from a ggplot, which can then be added as a separate plot to a `grid.arrange`. This is useful if you have many plots with the same legend.
 > Example:
@@ -34,26 +34,26 @@ f2 <- f2 +
 grid.arrange(f1, f2, legend)
 ```
 
-dataframe <- read_csv_with_labels(fileName)
+dataframe <- **read_csv_with_labels**(fileName)
 
 > Reads a csv file with variable names on the first row and the variable labels on the second row.
 
-x_corr <- cor.prob(x)
+x_corr <- **cor.prob**(x)
 
 > Creates a correlation matrix with p-values. Generates a table with all combinations of variables + a column with the correlation, and another column with the p-value. 
 > _Original source:_ Stephen Turner, https://gist.github.com/stephenturner/3492773
 
-dataframe_list <- read_excel_allsheets(filename, tibble = FALSE)
+dataframe_list <- **read_excel_allsheets**(filename, tibble = FALSE)
 
 > Reads all sheets from Excel file into a list of dataframes. The names of each element in the list is the name of the Excel sheet. By default it creates list of dataframes, setting tibble to TRUE, creates list of tibbles.
 > _Original source:_ https://stackoverflow.com/questions/12945687/read-all-worksheets-in-an-excel-workbook-into-an-r-list-with-data-frames
 
 
-get_os()
+**get_os**()
 
 > Identifies your OS. Returns "win", "mac" or "unix".
 
-excel(dataframe)
+**excel**(dataframe)
 
 > Opens dataframe in Excel (for Windows) or LibreOffice (for Linux). I'm not sure how to add Mac support. 
 > Solves the issue that large dataframes cannot be viewed in RStudio's with View().
