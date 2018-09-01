@@ -11,15 +11,17 @@ x_growth <- **growth.rate**(x, lag)
 
 **barplot_se**(m, se, group_labels, title) 
 
-> Create a barplot with standard errors
-> `m`: list of means, showed as higher or lower bar columns
-> `se`: list of standard errors, showed as error bars attached to the columns
-> `group_labels`: list of labels for each bar
-> `title`: title of the barplot
+> Create a barplot with standard errors  
+> 
+> - `m`: list of means, showed as higher or lower bar columns  
+> - `se`: list of standard errors, showed as error bars attached to the columns  
+> - `group_labels`: list of labels for each bar  
+> - `title`: title of the barplot  
 
 legend <- **get.legend**(a.gplot)
 
 > Gets the legend from a ggplot, which can then be added as a separate plot to a `grid.arrange`. This is useful if you have many plots with the same legend.
+>
 > Example:
 
 ```r
@@ -41,11 +43,13 @@ dataframe <- **read_csv_with_labels**(fileName)
 x_corr <- **cor.prob**(x)
 
 > Creates a correlation matrix with p-values. Generates a table with all combinations of variables + a column with the correlation, and another column with the p-value. 
+>
 > _Original source:_ Stephen Turner, https://gist.github.com/stephenturner/3492773
 
 dataframe_list <- **read_excel_allsheets**(filename, tibble = FALSE)
 
 > Reads all sheets from Excel file into a list of dataframes. The names of each element in the list is the name of the Excel sheet. By default it creates list of dataframes, setting tibble to TRUE, creates list of tibbles.
+>
 > _Original source:_ https://stackoverflow.com/questions/12945687/read-all-worksheets-in-an-excel-workbook-into-an-r-list-with-data-frames
 
 
@@ -59,6 +63,7 @@ dataframe_list <- **read_excel_allsheets**(filename, tibble = FALSE)
 > Solves the issue that large dataframes cannot be viewed in RStudio's with View().
 > In Windows, temp .csv file saved in temporary folder (somewhere in "C:\Users\<YourName>\AppData\Local\Temp")
 > In Linux, the temp file is saved in the home directory.
-> _Original author:_ https://github.com/geneorama/geneorama/blob/master/R/wtf.R
+>
+> _Original author:_ https://github.com/geneorama/geneorama/blob/master/R/wtf.R   
 > This function is changed from the original to use `fwrite` instead of `write.table`. It works MUCH faster this way. And it is changed to work for Linux as well.
 
