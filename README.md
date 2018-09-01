@@ -1,6 +1,16 @@
 # rtools
 Some useful functions in R
 
+## How to use
+
+You can either download the file `tools.r` or source it directly from github:
+
+```r
+source("https://raw.githubusercontent.com/vladtarko/rtools/master/tools.r")
+```
+
+## Description of the available functions
+
 dataframe_summary <- **var.explorer**(dataframe)
 
 > Creates a summary dataframe that can be used in RStudio similar to the variable explorer in Stata, but which also includes the summary statistics. This is useful particularly if you have a large dataset with a very large number of variables with hard to remember names. Can also be used to generate a table of summary statistics.
