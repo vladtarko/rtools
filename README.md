@@ -13,7 +13,7 @@ source("https://raw.githubusercontent.com/vladtarko/rtools/master/tools.r")
 
 dataframe_summary <- **var.explorer**(dataframe)  
 
-> Creates a summary dataframe that can be used in RStudio similar to the variable explorer in Stata, but which also includes the summary statistics. After creating the summary table, `View(dataframe_summary)` acts as the interactive variable explorer. This is useful particularly if you have a large dataset with a very large number of variables with hard to remember names. Can also be used to generate a table of summary statistics.
+> Creates a summary dataframe that can be used in RStudio similar to the variable explorer in Stata, but which also includes the summary statistics. After creating the summary table, `View(dataframe_summary)` acts as the interactive variable explorer. This is useful particularly if you have a large dataset with a very large number of variables with hard to remember names, but eloquent variable labels. Can also be used to generate a table of summary statistics.
 
 x_growth <- **growth.rate**(x, lag)
 
