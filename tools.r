@@ -3,6 +3,7 @@
 ## libraries used by some of the functions (some require install) -------------------
 library(pastecs)
 library(Hmisc)
+library(sjlabelled)
 library(data.table)
 library(readxl)
 library(dplyr)
