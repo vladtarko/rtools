@@ -13,27 +13,40 @@ library(dplyr)
 #     * This is useful particularly if you have a large dataset 
 #       with a very large number of variables with hard to remember names.
 #     * Can also be used to generate a table of summary statistics.
-var.explorer <- function(df)
+#     * if `viewer` is TRUE (default) the result is shown in RStudio's Viewer pane
+#       as a searchable datatable
+var.explorer <- function(df, viewer = TRUE)
 {
   
+  library(dplyr)
+  
+  # build summary
   summary_df <- data.frame(
-    names(df), 
-    Hmisc::label(df), 
-    t(pastecs::stat.desc(df)) 
-  ) 
+      Variable    = names(df), 
+      Description = sjlabelled::get_label(df), 
+      t(pastecs::stat.desc(df)) 
+    ) %>% 
+    dplyr::select(
+      Variable, Description, 
+      Obs. = nbr.val, Missing = nbr.na, 
+      min, max, median, mean, std.dev)
   
-  # keep only some of the summary statistics
-  summary_df <- subset(summary_df, 
-                   select=c(names.df., Hmisc..label.df., nbr.val, nbr.na, 
-                            min, max, median, mean, std.dev))
+  # use numbers as rownames, corresponding to the column numbers
+  rownames(summary_df) <- seq_along(summary_df$Variable)
   
-  # label them better
-  names(summary_df) <- c("Variable", "Description", "Obs.", "Missing", 
-                     "Min", "Max", "Median", "Mean", "Std.Dev.")
+  # if viewer = TRUE show as searchable datatable in the viewer pane
+  if(viewer) {
+    
+    tempFileName <- tempfile("summary_df_", fileext = ".html")
+    
+    summary_df %>% 
+      DT::datatable() %>% 
+      DT::formatRound(columns = 5:9, digits = 2) %>% 
+      DT::saveWidget(tempFileName)
+    
+    rstudioapi::viewer(tempFileName)
+  }
   
-  # create indices for each variable, i.e. the column number
-  for(index in 1:length(summary_df$Variable)){ rownames(summary_df)[index]<-index }
-
   return(summary_df)
 }
 
@@ -53,7 +66,7 @@ std.err <- function(x)
   sqrt(var(x,na.rm=TRUE)/length(na.omit(x)))
 }
 
-# create a barplot with standard errors ---------------------------------------------
+# create a base r barplot with standard errors ---------------------------------------------
 # m: list of means, showed as higher or lower bar columns
 # se: list of standard errors, showed as error bars attached to the columns
 # group_labels: list of labels for each bar
