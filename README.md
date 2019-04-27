@@ -3,10 +3,10 @@ Some useful functions in R
 
 ## How to use
 
-You can either download the file `tools.r`, copy-paste from it only the function you want, or source the whole collection directly from github:
+You can either download the file `tools.r`, copy-paste from it only the function you want, or source the desired function directly from github. For instance:
 
 ```r
-source("https://raw.githubusercontent.com/vladtarko/rtools/master/tools.r")
+source("https://raw.githubusercontent.com/vladtarko/rtools/master/vars_explore.r")
 ```
 
 ## Description of the available functions
