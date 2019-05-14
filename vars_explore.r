@@ -9,8 +9,6 @@
 vars_explore <- function(df, viewer = TRUE)
 {
   
-  library(dplyr)
-  
   # build summary
   summary_df <- data.frame(
       Variable    = names(df), 
