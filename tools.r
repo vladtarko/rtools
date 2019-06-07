@@ -90,15 +90,12 @@ flattenSquareMatrix <- function(m)
 # read all sheets from excel file into a list of dataframes ------------------------------------
 # the names of each element in the list is the name of the excel sheet
 # source: https://stackoverflow.com/questions/12945687/read-all-worksheets-in-an-excel-workbook-into-an-r-list-with-data-frames
-read_excel_allsheets <- function(filename, tibble = FALSE) {
-  # I prefer straight data.frames
-  # but if you like tidyverse tibbles (the default with read_excel)
-  # then just pass tibble = TRUE
+read_excel_allsheets <- function(filename, tibble = TRUE) {
   sheets <- readxl::excel_sheets(filename)
-  x <- lapply(sheets, function(X) readxl::read_excel(filename, sheet = X))
-  if(!tibble) x <- lapply(x, as.data.frame)
+  x <- lapply(sheets, function(X) { readxl::read_excel(filename, sheet = X) })
+  if(!tibble) { x <- lapply(x, as.data.frame) }
   names(x) <- sheets
-  retunr(x)
+  return(x)
 }
 
 
