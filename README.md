@@ -50,6 +50,10 @@ dataframe <- **read_csv_with_labels**(fileName)
 
 > Reads a csv file with variable names on the first row and the variable labels on the second row.
 
+df_list <- **read_excel_allsheets**(fileName)
+
+> Reads all the sheets from an Excel file into a list of tibbles/dataframes. The names of each element in the list is the name of the excel sheet.
+
 x_corr <- **cor.prob**(x)
 
 > Creates a correlation matrix with p-values. Generates a table with all combinations of variables + a column with the correlation, and another column with the p-value. 
