@@ -15,6 +15,14 @@ dataframe_summary <- **vars_explore**(dataframe)
 
 > Creates a summary dataframe that can be used in RStudio similar to the variable explorer in Stata, but which also includes the summary statistics. By default it opens an interactive datatable in the RSTudio's Viewer Pane (the option `view = FALSE` turns this off). This is useful particularly if you have a large dataset with a very large number of variables with hard to remember names, but eloquent variable labels. Can also be used to generate a table of summary statistics.
 
+dataframe <- **read_csv_with_labels**(fileName)
+
+> Reads a csv file with variable names on the first row and the variable labels on the second row.
+
+df_list <- **read_excel_allsheets**(fileName)
+
+> Reads all the sheets from an Excel file into a list of tibbles/dataframes. The names of each element in the list is the name of the excel sheet.
+
 x_growth <- **growth.rate**(x, lag)
 
 > Creates a growth rate variable. It doesn't require data to be time series.
@@ -45,14 +53,6 @@ f2 <- f2 +
         theme(legend.position = "none")
 grid.arrange(f1, f2, legend)
 ```
-
-dataframe <- **read_csv_with_labels**(fileName)
-
-> Reads a csv file with variable names on the first row and the variable labels on the second row.
-
-df_list <- **read_excel_allsheets**(fileName)
-
-> Reads all the sheets from an Excel file into a list of tibbles/dataframes. The names of each element in the list is the name of the excel sheet.
 
 x_corr <- **cor.prob**(x)
 
