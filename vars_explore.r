@@ -43,7 +43,7 @@ vars_explore <- function(df,
     psych::describe(df)
   ) %>% 
     dplyr::mutate(
-      Missing = max(n) - n) %>% 
+      Missing = nrow(df) - n) %>% 
     dplyr::select(
       Variable, 
       Description, 
@@ -70,6 +70,8 @@ vars_explore <- function(df,
       ) %>% 
       DT::formatRound(columns = seq(5, length(stats) + 4), 
                       digits = digits) %>%
+      DT::formatStyle(columns = seq(1, length(stats) + 4), 
+                       fontSize = font.size) %>%
       DT::saveWidget(tempFileName)
     
     rstudioapi::viewer(tempFileName)
