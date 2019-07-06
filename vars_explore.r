@@ -32,15 +32,16 @@
 vars_explore <- function(df, 
                          stats = c("mean", "median", "sd", "min", "max"), 
                          viewer = TRUE,
-                         digits = 2)
+                         digits = 2,
+                         font.size = "10pt")
 {
   
   # build summary
   summary_df <- data.frame(
-      Variable    = names(df), 
-      Description = sjlabelled::get_label(df), 
-      psych::describe(df)
-    ) %>% 
+    Variable    = names(df), 
+    Description = sjlabelled::get_label(df), 
+    psych::describe(df)
+  ) %>% 
     dplyr::mutate(
       Missing = max(n) - n) %>% 
     dplyr::select(
@@ -49,7 +50,7 @@ vars_explore <- function(df,
       Obs. = n, 
       Missing,
       stats)
-    
+  
   # use numbers as rownames, corresponding to the column numbers
   rownames(summary_df) <- seq_along(summary_df$Variable)
   
@@ -59,9 +60,16 @@ vars_explore <- function(df,
     tempFileName <- tempfile("summary_df_", fileext = ".html")
     
     summary_df %>% 
-      DT::datatable() %>% 
+      DT::datatable(
+        options=list(
+          initComplete = htmlwidgets::JS(
+            "function(settings, json) {",
+            paste0("$(this.api().table().container()).css({'font-size': '", font.size, "'});"),
+            "}")),
+        class = "compact"
+      ) %>% 
       DT::formatRound(columns = seq(5, length(stats) + 4), 
-                      digits = digits) %>% 
+                      digits = digits) %>%
       DT::saveWidget(tempFileName)
     
     rstudioapi::viewer(tempFileName)
