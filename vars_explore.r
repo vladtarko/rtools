@@ -43,10 +43,13 @@ vars_explore <- function(df,
     psych::describe(df)
   ) %>% 
     dplyr::mutate(
-      Missing = nrow(df) - n) %>% 
+      Missing = nrow(df) - n,
+      Type    = map_chr(df, class)
+    ) %>% 
     dplyr::select(
       Variable, 
-      Description, 
+      Description,
+      Type,
       Obs. = n, 
       Missing,
       stats)
@@ -61,17 +64,27 @@ vars_explore <- function(df,
     
     summary_df %>% 
       DT::datatable(
-        options=list(
+        extensions = 'Scroller',
+        options = list(
           initComplete = htmlwidgets::JS(
             "function(settings, json) {",
-            paste0("$(this.api().table().container()).css({'font-size': '", font.size, "'});"),
-            "}")),
-        class = "compact"
+            paste0("$(this.api().table().header()).css({'font-size': '", font.size, "'});"),
+            "}"),
+          class = "compact",
+          dom = 'fti',
+          pageLength = nrow(summary_df),
+          columnDefs = list(
+            list(className = 'dt-left', targets = c(1,2))
+            ),
+          
+          # for Scroller extension
+          deferRender = TRUE,
+          scrollY = 200,
+          scroller = TRUE
+        ),
       ) %>% 
-      DT::formatRound(columns = seq(5, length(stats) + 4), 
-                      digits = digits) %>%
-      DT::formatStyle(columns = seq(1, length(stats) + 4), 
-                       fontSize = font.size) %>%
+      DT::formatRound(columns = stats, digits = digits) %>%
+      DT::formatStyle(columns = seq(0, length(summary_df)), fontSize = font.size) %>%
       DT::saveWidget(tempFileName)
     
     rstudioapi::viewer(tempFileName)
